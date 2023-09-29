@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <AntHeader
       style={{
-        background: "#EDF2F4",
+        background: "#002140",
       }}
     >
       <Row
