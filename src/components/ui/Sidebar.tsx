@@ -35,7 +35,7 @@ const SideBar = () => {
           marginBottom: "1rem",
         }}
       >
-        UM
+        UMS
       </div>
       <Menu
         theme="dark"
