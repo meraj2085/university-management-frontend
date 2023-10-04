@@ -27,7 +27,9 @@ const Header = () => {
   return (
     <AntHeader
       style={{
-        background: "#002140",
+        height: "65.5px",
+        background: "#FFFFFF",
+        // marginLeft: "1px",
       }}
     >
       <Row
@@ -40,7 +42,7 @@ const Header = () => {
         <p
           style={{
             margin: "0px 5px",
-            color: "#fff",
+            color: "black",
           }}
         >
           {role}
