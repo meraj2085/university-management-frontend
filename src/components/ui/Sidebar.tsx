@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ConfigProvider, Layout, Menu } from "antd";
+import { ConfigProvider, Layout, Menu, MenuTheme } from "antd";
 const { Sider } = Layout;
 import { sidebarItems } from "@/constants/sidebarItems";
 import { USER_ROLE } from "@/constants/role";
 import { getUserInfo } from "@/services/auth.service";
+import { useAppSelector } from "@/redux/hooks";
+import { SiderTheme } from "antd/es/layout/Sider";
 
 const SideBar = () => {
+  const theme = useAppSelector((state) => state.config.theme);
   const [collapsed, setCollapsed] = useState(false);
   const { role } = getUserInfo() as any;
 
@@ -23,7 +26,9 @@ const SideBar = () => {
     >
       <Sider
         collapsible
-        theme="light"
+        theme={theme as SiderTheme | undefined}
+
+        // theme="dark"
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         width={280}
@@ -39,7 +44,7 @@ const SideBar = () => {
       >
         <div
           style={{
-            color: "black",
+            color: "#A5C5E9",
             fontSize: "2rem",
             textAlign: "center",
             fontWeight: "bold",
@@ -52,10 +57,11 @@ const SideBar = () => {
         </div>
         <Menu
           style={{
-            borderTop: "1px solid #e8e8e8",
+            borderTop: "0.5px solid #e8e8e8",
             borderRight: "none",
           }}
-          theme="light"
+          theme={theme as MenuTheme | undefined}
+          // theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={sidebarItems(role)}

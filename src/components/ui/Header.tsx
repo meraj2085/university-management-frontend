@@ -1,12 +1,28 @@
-import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  Layout,
+  MenuProps,
+  Row,
+  Space,
+  Switch,
+} from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { authKey } from "@/constants/storageKey";
 import { useRouter } from "next/navigation";
+import { FireOutlined, BugOutlined } from "@ant-design/icons";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
+  // const theme = useAppSelector((state) => state.config.theme);
+  const localStorageTheme = getFromLocalStorage("theme");
+  const { theme } = localStorageTheme ? JSON.parse(localStorageTheme) : null;
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const logOut = () => {
     removeUserInfo(authKey);
@@ -41,11 +57,25 @@ const Header = () => {
       >
         <p
           style={{
-            margin: "0px 5px",
+            margin: "0px 10px",
             color: "black",
           }}
         >
-          {role}
+          {/* {role} */}
+          <Switch
+            onChange={(checked) => {
+              if (checked) {
+                setToLocalStorage("theme", JSON.stringify({ theme: "dark" }));
+                dispatch({ type: "config/setTheme", payload: "dark" });
+              } else {
+                setToLocalStorage("theme", JSON.stringify({ theme: "light" }));
+                dispatch({ type: "config/setTheme", payload: "light" });
+              }
+            }}
+            checkedChildren={<BugOutlined />}
+            unCheckedChildren={<FireOutlined />}
+            defaultChecked={theme === "dark" ? true : false}
+          />
         </p>
         <Dropdown menu={{ items }}>
           <a>
