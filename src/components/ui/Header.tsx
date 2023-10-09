@@ -20,9 +20,10 @@ const { Header: AntHeader } = Layout;
 const Header = () => {
   // const theme = useAppSelector((state) => state.config.theme);
   const localStorageTheme = getFromLocalStorage("theme");
-  const { theme } = localStorageTheme ? JSON.parse(localStorageTheme) : null;
+  const theme = localStorageTheme ? JSON.parse(localStorageTheme) : null;
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { role } = getUserInfo() as any;
 
   const logOut = () => {
     removeUserInfo(authKey);
@@ -38,8 +39,12 @@ const Header = () => {
         </Button>
       ),
     },
+    {
+      key: "0",
+      label: <Button type="text">{role}</Button>,
+    },
   ];
-  const { role } = getUserInfo() as any;
+
   return (
     <AntHeader
       style={{
@@ -61,7 +66,6 @@ const Header = () => {
             color: "black",
           }}
         >
-          {/* {role} */}
           <Switch
             onChange={(checked) => {
               if (checked) {
@@ -74,7 +78,7 @@ const Header = () => {
             }}
             checkedChildren={<BugOutlined />}
             unCheckedChildren={<FireOutlined />}
-            defaultChecked={theme === "dark" ? true : false}
+            defaultChecked={theme?.theme === "dark" ? true : false}
           />
         </p>
         <Dropdown menu={{ items }}>

@@ -8,6 +8,8 @@ import { USER_ROLE } from "@/constants/role";
 import { getUserInfo } from "@/services/auth.service";
 import { useAppSelector } from "@/redux/hooks";
 import { SiderTheme } from "antd/es/layout/Sider";
+import universityImage from "../../assets/university.png";
+import Image from "next/image";
 
 const SideBar = () => {
   const theme = useAppSelector((state) => state.config.theme);
@@ -27,7 +29,6 @@ const SideBar = () => {
       <Sider
         collapsible
         theme={theme as SiderTheme | undefined}
-
         // theme="dark"
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
@@ -48,12 +49,13 @@ const SideBar = () => {
             fontSize: "2rem",
             textAlign: "center",
             fontWeight: "bold",
-            marginBottom: ".5rem",
-            padding: "10px 0px",
+            margin: "4px",
+            // padding: "10px 0px",
             cursor: "pointer",
           }}
         >
-          UMS
+          {/* UMS */}
+          <Image src={universityImage} width={49} alt="University image" />
         </div>
         <Menu
           style={{
