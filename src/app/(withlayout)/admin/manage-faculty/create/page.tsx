@@ -110,6 +110,7 @@ const CreateFacultyPage = () => {
               <ACDepartmentField
                 name="faculty.academicDepartment"
                 label="Academic Department"
+                onChange={(e) => console.log(e)}
               />
             </Col>
 

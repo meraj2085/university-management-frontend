@@ -24,6 +24,7 @@ const Header = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { role } = getUserInfo() as any;
+  console.log(role);
 
   const logOut = () => {
     removeUserInfo(authKey);

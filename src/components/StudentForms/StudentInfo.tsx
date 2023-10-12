@@ -91,6 +91,7 @@ const StudentInfo = () => {
           <ACDepartmentField
             name="student.academicDepartment"
             label="Academic Department"
+            onChange={(e) => console.log(e)}
           />
         </Col>
         <Col
